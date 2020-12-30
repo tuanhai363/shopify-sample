@@ -45,9 +45,7 @@ class EditProduct extends React.Component {
     render() {
         const { name, price, discount, variantId } = this.state;
         return (
-            <Mutation
-                mutation={UPDATE_PRICE}
-            >
+            <Mutation mutation={UPDATE_PRICE}>
                 {(handleSubmit, {error, data}) => {
                     const showError = error && (
                         <Banner status="critical">{error.message}</Banner>

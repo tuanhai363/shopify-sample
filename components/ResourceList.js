@@ -46,6 +46,7 @@ class ResourceListWithProducts extends React.Component {
     static contextType = Context;
 
     render() {
+        console.log('go here');
         const app = this.context;
         const redirectToProduct = () => {
             const redirect = Redirect.create(app);
@@ -55,13 +56,9 @@ class ResourceListWithProducts extends React.Component {
             );
         };
         const twoWeeksFromNow = new Date(Date.now() + 12096e5).toDateString();
-        console.log(store.get('ids'), '>>>>>>>>>>');
         return (
             <Query query={GET_PRODUCTS_BY_ID} variables={{ ids: store.get('ids') }}>
                 {({ data, loading, error }) => {
-                    console.log(data, '<><>');
-                    console.log(loading, '<><><>');
-                    console.log(error, '<><><><>');
                     if (loading) return <div>Loading…</div>;
                     if (error) return <div>{error.message}</div>;
                     console.log(data);
