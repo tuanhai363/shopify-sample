@@ -36,8 +36,5 @@
     "react-dom": "^16.14.0",
     "shopify-api-node": "^3.6.0",
     "store-js": "^2.0.4"
-  },
-  "engines": {
-    "node": ">= 7.6"
   }
 }
