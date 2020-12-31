@@ -2,7 +2,6 @@ require('isomorphic-fetch');
 const dotenv = require('dotenv');
 const Koa = require('koa');
 const next = require('next');
-const express = require('express');
 const { default: createShopifyAuth } = require('@shopify/koa-shopify-auth');
 const { verifyRequest } = require('@shopify/koa-shopify-auth');
 const session = require('koa-session');
@@ -30,7 +29,6 @@ const {
 app.prepare().then(() => {
     const server = new Koa();
     const router = new Router();
-    const serverExpress = express()
     server.use(session({ secure: true, sameSite: 'none' }, server));
     server.keys = [SHOPIFY_API_SECRET_KEY];
     server.use(
@@ -85,10 +83,10 @@ app.prepare().then(() => {
 
         console.log('received webhook create product.', ctx.state.webhook.payload);
         // app.render(webhook, ctx, '/process-create-order')
-        server.use(serverExpress.get('/process-create-order', (req, res) => {
-            console.log('go go go!!!!');
-            return app.render(req, res, '/process-create-order', req.query)
-        }))
+        // server.use(serverExpress.get('/process-create-order', (req, res) => {
+        //     console.log('go go go!!!!');
+        //     return app.render(req, res, '/process-create-order', req.query)
+        // }))
 
         console.log('EnDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD');
     });
