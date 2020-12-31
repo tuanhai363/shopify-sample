@@ -29,6 +29,7 @@
     "koa": "^2.13.0",
     "koa-router": "^8.0.8",
     "koa-session": "^6.1.0",
+    "micromatch": "^4.0.2",
     "next": "^10.0.3",
     "react": "^16.14.0",
     "react-apollo": "^3.1.5",
