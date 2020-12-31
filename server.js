@@ -12,7 +12,7 @@ const { ApiVersion } = require('@shopify/koa-shopify-graphql-proxy');
 const Router = require('koa-router');
 const {receiveWebhook, registerWebhook} = require('@shopify/koa-shopify-webhooks');
 const getSubscriptionUrl = require('./server/getSubscriptionUrl');
-// const router = require('./server/routes');
+const router = require('./server/routes');
 
 const port = parseInt(process.env.PORT, 10) || 3000;
 const dev = process.env.NODE_ENV !== 'production';
@@ -29,7 +29,7 @@ const {
 } = process.env;
 app.prepare().then(() => {
     const server = new Koa();
-    const router = new Router();
+    // const router = new Router();
     server.use(session({ secure: true, sameSite: 'none' }, server));
     server.keys = [SHOPIFY_API_SECRET_KEY];
     server.use(
@@ -78,32 +78,32 @@ app.prepare().then(() => {
         }),
     );
 
-    const webhook = receiveWebhook({secret: SHOPIFY_API_SECRET_KEY});
-
-    /**add new **/
-    router.post('/webhooks/products/create', webhook, (ctx) => {
-
-        console.log('received webhook create product.', ctx.state.webhook.payload);
-        // app.render(webhook, ctx, '/process-create-order')
-        // server.use(serverExpress.get('/process-create-order', (req, res) => {
-        //     console.log('go go go!!!!');
-        //     return app.render(req, res, '/process-create-order', req.query)
-        // }))
-        console.log('End DDDDDDDDDdd');
-    });
-
-    router.post('/webhooks/orders/create', webhook, (ctx) => {
-        console.log('received webhook orders: ', ctx.state.webhook.payload);
-        console.log('received webhook create Order.')
-    });
-
-    router.post('/test', (ctx) => {
-        console.log('received webhook create Order.')
-    });
-
-    router.get('/testabc', (ctx) => {
-        console.log('received webhook create Order.')
-    });
+    // const webhook = receiveWebhook({secret: SHOPIFY_API_SECRET_KEY});
+    //
+    // /**add new **/
+    // router.post('/webhooks/products/create', webhook, (ctx) => {
+    //
+    //     console.log('received webhook create product.', ctx.state.webhook.payload);
+    //     // app.render(webhook, ctx, '/process-create-order')
+    //     // server.use(serverExpress.get('/process-create-order', (req, res) => {
+    //     //     console.log('go go go!!!!');
+    //     //     return app.render(req, res, '/process-create-order', req.query)
+    //     // }))
+    //     console.log('End DDDDDDDDDdd');
+    // });
+    //
+    // router.post('/webhooks/orders/create', webhook, (ctx) => {
+    //     console.log('received webhook orders: ', ctx.state.webhook.payload);
+    //     console.log('received webhook create Order.')
+    // });
+    //
+    // router.post('/test', (ctx) => {
+    //     console.log('received webhook create Order.')
+    // });
+    //
+    // router.get('/testabc', (ctx) => {
+    //     console.log('received webhook create Order.')
+    // });
 
     /**add new **/
 
