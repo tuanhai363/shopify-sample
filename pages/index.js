@@ -1,10 +1,5 @@
 import React, { useState } from 'react';
-import {
-    EmptyState, Layout,
-    Page, Form,
-    FormLayout, Checkbox,
-    TextField, Button,
-} from '@shopify/polaris';
+import { EmptyState, Layout, Page } from '@shopify/polaris';
 import { ResourcePicker, TitleBar } from '@shopify/app-bridge-react';
 import store from 'store-js';
 import ResourceListWithProducts from '../components/ResourceList';
@@ -16,7 +11,8 @@ class Index extends React.Component {
 
     render() {
         const emptyState = !store.get('ids');
-        console.log(store.enabled , '>><><><>>>');
+        console.log(store.enabled , 'Store enable >><><><>>>');
+        console.log(store.get('ids') , 'Store get Id:   ');
         return (
             <Page>
                 <TitleBar

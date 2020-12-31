@@ -11,7 +11,7 @@ const { default: graphQLProxy } = require('@shopify/koa-shopify-graphql-proxy');
 const { ApiVersion } = require('@shopify/koa-shopify-graphql-proxy');
 const Router = require('koa-router');
 const {receiveWebhook, registerWebhook} = require('@shopify/koa-shopify-webhooks');
-
+const getSubscriptionUrl = require('./server/getSubscriptionUrl');
 
 const port = parseInt(process.env.PORT, 10) || 3000;
 const dev = process.env.NODE_ENV !== 'production';
@@ -68,10 +68,11 @@ app.prepare().then(() => {
                 }
 
                 if (registration.success) {
-                    console.log('Successfully registered webhook!');
+                    console.log('Successfully registered webhook Product!');
                 } else {
-                    console.log('Failed to register webhook', registration.result);
+                    console.log('Failed to register webhook Product', registration.result);
                 }
+                ctx.redirect('/');
             },
         }),
     );
@@ -96,9 +97,17 @@ app.prepare().then(() => {
         console.log('received webhook create Order.')
     });
 
+    router.post('/test', (ctx) => {
+        console.log('received webhook create Order.')
+    });
+
+    router.get('/testabc', (ctx) => {
+        console.log('received webhook create Order.')
+    });
+
     /**add new **/
 
-    server.use(graphQLProxy({version: ApiVersion.October19}));
+    server.use(graphQLProxy({version: ApiVersion.October20}));
     // server.use(verifyRequest());
     // server.use(async (ctx) => {
     //     await handle(ctx.req, ctx.res);
@@ -106,11 +115,13 @@ app.prepare().then(() => {
     //     ctx.res.statusCode = 200;
     //     return
     // });
+
     router.get('(.*)', verifyRequest(), async (ctx) => {
         await handle(ctx.req, ctx.res);
         ctx.respond = false;
         ctx.res.statusCode = 200;
     });
+
     server.use(router.allowedMethods());
     server.use(router.routes());
 
