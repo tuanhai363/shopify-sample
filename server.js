@@ -88,8 +88,7 @@ app.prepare().then(() => {
         //     console.log('go go go!!!!');
         //     return app.render(req, res, '/process-create-order', req.query)
         // }))
-
-        console.log('EnDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD');
+        console.log('End DDDDDDDDDdd');
     });
 
     router.post('/webhooks/orders/create', webhook, (ctx) => {
